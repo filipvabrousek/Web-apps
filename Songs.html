@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+
+	<title>
+	</title>
+</head>
+
+<body>
+	<div id="d">
+		Reset
+	</div>
+
+
+	<p>Dole na stránce se objeví seznam vybraných skladeb</p>
+
+
+	<section id="filtered-total">
+		Poté co klepnete na tlačítko zde bude zobrazen počet skladeb a celkový čas
+	</section>
+
+
+	<section id="data">
+	</section>
+
+
+	<h2>Folk</h2>
+
+
+	<section id="folk">
+	</section>
+
+
+	<h2>Instrum</h2>
+
+
+	<section id="instrum">
+	</section>
+
+
+	<h2>Jazz</h2>
+
+
+	<section id="jazz">
+	</section>
+
+
+	<h2>Kelt</h2>
+
+
+	<section id="kelt">
+	</section>
+
+
+	<h2>Pop</h2>
+
+
+	<section id="pop">
+	</section>
+
+
+	<h2>Spirit</h2>
+
+
+	<section id="spirit">
+	</section>
+
+
+	<h2>Tramp</h2>
+
+
+	<section id="tramp">
+	</section>
+
+
+	<h2>Gospel</h2>
+
+
+	<section id="gospel">
+	</section>
+
+
+	<h2>Advent</h2>
+
+
+	<section id="advent">
+	</section>
+
+
+	<h2>Christmas</h2>
+
+
+	<section id="christmas">
+	</section>
+
+
+
+
+
+	
+
+
+	<section id="total">
+	</section>
+	<style>
+	      * {
+	          margin: 0;
+	          padding: 0;
+	          font-family: Arial;
+	      }
+
+	      .item {
+	          color: green;
+	      }
+	      
+	      .red{
+	          color: red;
+	          font-weight: bold;
+	      }
+
+	      section {
+	          background: #34495e;
+	          margin: 1em;
+	          padding: 2em;
+	          color: white;
+
+	      }
+
+	      button {
+	          padding: 2em;
+	          margin: 1em;
+	          width: 10em;
+	          height: 8em;
+	          background: white;
+	          color: black;
+	          border: none;
+              font-weight: bold;
+              font-size: 0.8em;
+	      }
+	      
+	      #total{
+	          text-align: center;
+	      }
+	      
+	      h2{
+	          padding: 1em;
+	          color: #34495e;
+	          font-size: 2em;
+	      }
+	      p{
+	          padding: 1em;
+	      }
+	      
+	      h1{
+	          font-size: 3em;
+	          padding: 0.5em;
+	            color: #34495e;
+	      }
+	      #d{
+	          color: red;
+	          margin: 1em;
+	          font-weight: bold;
+	      }
+        
+        .delete{
+            font-weight: bold;
+            color: green;
+        }
+        
+        .del{
+            background: red;
+            height: 0.5em;
+            width: 0.5em;
+            border-radius: 1em;
+            padding-left: 1.2em;
+            color: #fff;
+         
+        }
+	</style>
+    
+    
+  <script>
+      
+   const UIC = (() => {
+
+       var total = 0;
+       var count = 0;
+
+       class Song {
+           constructor(name, len) {
+               this.name = name;
+               this.len = len;
+           }
+
+           get() {
+               return this.len;
+           }
+       }
+
+
+
+
+       let songs = [
+           new Song("Bludiště", 180),
+           new Song("Boty", 180),
+           new Song("Černé moře", 242),
+           new Song("Déšť", 157),
+           new Song("Hledání", 191),
+           new Song("Hrávali", 220),
+           new Song("Hulaj hulaj", 180),
+           new Song("Chodila, chodila", 90),
+           new Song("Chodníček", 172),
+           new Song("Koně/ tváře", 174),
+           new Song("Krajina", 263),
+           new Song("Opona", 240),
+           new Song("Počmárané nebe", 180),
+           new Song("Santa Monica", 180),
+           new Song("Svítání", 226),
+           new Song("Šípková růženka", 225),
+           new Song("Valmontská", 218),
+           new Song("Vlak života", 167),
+       ];
+
+       let folk = [
+           new Song("Časy se mění", 190),
+           new Song("Podzimní", 180),
+           new Song("Už se nechci vdát", 180),
+           new Song("Zabili, zabili", 180),
+       ];
+
+
+       let instrum = [
+           new Song("Andente z Konc. G dur pro dvě mandoliny", 180),
+           new Song("Cantabile", 173),
+       ];
+
+       let jazz = [
+           new Song("Báječný svět", 129),
+           new Song("Blues o kolejích", 180),
+           new Song("David a Goliáš", 180),
+           new Song("Hudba v oblacích", 186),
+           new Song("Nikdy nic nikdo nemá", 180),
+           new Song("Říkej mi to prosím potichoučku", 154),
+           new Song("Svítá", 180),
+           new Song("Trochu v hlavě mám", 180),
+           new Song("Velký vůz a blues", 180)
+       ];
+
+
+       let kelt = [
+           new Song("Bardova píseň", 281),
+           new Song("Dudy z Edinburgu", 180),
+           new Song("Krásnou vysočinou", 180),
+           new Song("Mateřídouška", 262),
+           new Song("Racek", 326)
+
+       ];
+
+       let pop = [
+           new Song("Když víru máš.", 198)
+       ]
+
+
+       let spirit = [
+           new Song("Haló slyš Pane můj", 124),
+           new Song("Já se těším", 154),
+           new Song("Mlýny", 180),
+           new Song("Mou dobrou zprávu hlásej", 180),
+           new Song("Pojď k nám, vejdi", 134),
+           new Song("Poutník a dívka", 180),
+           new Song("Ráno (Zazpívat píseň)", 141),
+           new Song("RSoudný den", 180),
+           new Song("Stoupá", 180)
+       ]
+
+
+       let tramp = [
+           new Song("A to je hvězda", 190),
+           new Song("Až stříbro měsíce", 197),
+           new Song("Až ztichnou Bílé skály", 211),
+           new Song("Balada o vzpouře na trojstěžníku Jižní Kříž", 198),
+           new Song("Bandita", 137),
+           new Song("Cariboo", 168),
+           new Song("Cesta domů", 180),
+           new Song("Den jde spát", 236),
+           new Song("Do ticha hraj mi dál", 180),
+           new Song("Hledám děvče na neděli", 180),
+           new Song("Chata na skále", 180),
+           new Song("Jsme pořád v sedle", 230),
+           new Song("Kovboj od zlaté řeky", 173),
+           new Song("Námořník", 173),
+           new Song("Poslouchej už duní vlak", 180),
+           new Song("Srdce jihu", 175),
+           new Song("Šilhavý mariňák", 232),
+           new Song("Ve strážním koši", 180),
+       ];
+
+
+       let gospel = [
+           new Song("Alle, psallite - Alleluya", 93),
+           new Song("Blagosloví (Ž 103)", 130),
+           new Song("Cantate Domino (Ž98)", 180),
+           new Song("De profundis", 193),
+           new Song("Do kostela v džínách", 205),
+           new Song("Jako řeka", 180),
+           new Song("Jen pojď dál", 184),
+           new Song("Missa de Angelis: Kyrie, Agnus, Pater noster ", 275),
+           new Song("Modlitba", 171),
+           new Song("Nejdražší Pane můj", 180),
+           new Song("Nikdy nekončící milost", 180),
+           new Song("Otče náš, jenž v nebi bydlíš", 180),
+           new Song("Pánu chválu vzdej", 87),
+           new Song("Shlédni dnes, prosíme", 180),
+           new Song("V království božím místa dost", 180),
+           new Song("Z tvé ruky, Pane můj", 182),
+       ];
+
+
+
+
+       let advent = [
+           new Song("Noc se chýlí", 129),
+           new Song("Píseň adventní (Hle přijde Pán)", 199),
+           new Song("Píseň adventní (Ó vinšovaná hodino)", 99),
+           new Song("Přijde Kristus", 146),
+           new Song("Rorando coeli defluant", 180),
+       ];
+
+       let christmas = [
+           new Song("A teče vodička", 180),
+           new Song("Aj růže rozvila se", 127),
+           new Song("Byla cesta, byla ušlapaná", 258),
+           new Song("Co se stalo, přihodilo", 112),
+           new Song("Čas radosti veselosti", 112),
+           new Song("Deck the Halls", 175),
+           new Song("Den přeslavný", 180),
+           new Song("Do Betléma", 180),
+           new Song("Dormi, dormi", 137),
+           new Song("Druhá o třech králích (Divné věci)", 180),
+           new Song("Hopsa bratrové", 72),
+           new Song("Hvězda jasná září", 180),
+           new Song("Jesu parvule", 77),
+           new Song("Když u svých stád", 86),
+           new Song("Koleda, koleda", 85),
+           new Song("Mé malé město Betlémské", 180),
+           new Song("Narodil se Kristus Pán", 162),
+           new Song("Narodil se syn Boží", 168),
+           new Song("No la devemos dormir", 91),
+           new Song("O narození Pána Krista (Děťátku my)", 123),
+           new Song("Oh come all ye faithfull (Adeste fideles)", 142),
+           new Song("Opět jiná o narození (Ó Pacholátko přemilé)", 180),
+           new Song("Padla rosa studená", 89),
+           new Song("Pán Kristus se narodil", 180),
+           new Song("Parvulus nobis nascitur", 180),
+           new Song("Pastýřská", 114),
+           new Song("Pozdravení děťátka (Sličné pacholátko)", 260),
+           new Song("Spí dítě", 180),
+           new Song("Syn boží se nám narodil", 180),
+           new Song("Tichá noc", 180),
+           new Song("Tři králové", 120),
+           new Song("Tulácká", 91),
+           new Song("Ukolébavka", 141),
+           new Song("Una pandereta suena", 180),
+           new Song("V jeslích dítě spinká", 180),
+           new Song("Vánoční", 205),
+           new Song("Vánoční magnet a střelec", 96),
+           new Song("Vánoční noc (Chtíc aby spal)", 188),
+           new Song("Vánoční roztomilost (Toto malé)", 63),
+           new Song("Veselme se všichni nyní", 96),
+           new Song("Vykvetla hůl Aronova", 180),
+           new Song("Zvání k jesličkám (K jesličkám)", 119),
+           new Song("Gaudete, gaudete", 180),
+           new Song("Kristus Pán se narodil", 180),
+           new Song("Z nebe přicházím samého", 180),
+           new Song("Cantate Domino (Ž98)", 180)
+       ];
+
+
+
+
+       function calc(arr) {
+           const sum = arr.reduce((prev, cur, index) => prev + cur, 0);
+           return [sum, sum / arr.lenght];
+       }
+
+       function getSongData(s) {
+           const l = s.map(el => el.len);
+           const [total, avg] = calc(l);
+           return total;
+       }
+
+
+
+
+    
+
+       function addToUI(arr, id, section) {
+           for (var i = 0; i < arr.length; i++) {
+
+
+               document.querySelector(section).innerHTML +=
+                   `<button class = ${id}>${arr[i].name} <br><span class="red">(${fancyTimeFormat(arr[i].len)})</span><br>
+<button class="delete-${id} del"><b>X</b></button></button>`
+           }
+
+           let e = getSongData(arr);
+           let f = fancyTimeFormat(e);
+           document.querySelector("#total").innerHTML = `Celkový čas všech písniček: ${f}`;
+
+       }
+
+
+
+
+       function fancyTimeFormat(time) {
+           var hrs = Math.floor(time / 3600);
+           var mins = Math.floor((time % 3600) / 60);
+           var secs = time % 60;
+           var ret = "";
+
+           if (hrs > 0) {
+               ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+           }
+
+           ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+           ret += "" + secs;
+           return ret;
+       }
+
+
+
+       function getTotalLength(arr) {
+           for (var i = 0; i < arr.length; i++) {
+               document.querySelector("#total").innerHTML =
+                   "<div>" + getSongData(arr) + " " + "<div>";
+           }
+       }
+
+
+
+
+       function addELs(arr, id) {
+
+           //testing
+
+
+           var buttons = document.querySelectorAll("." + id + "");
+           let deleteButtons = document.querySelectorAll(".delete-" + id);
+           let allButtons = document.querySelectorAll("button");
+
+
+           let myT = 0;
+           
+           for (let i = 0; i < buttons.length; i++) {
+
+               buttons[i].addEventListener("click", function() {
+
+                   total += arr[i].len;
+                   addTo2nd();
+                   count += 1;
+                   this.style.background = "#2ecc71";
+                   this.style.color = "white";
+
+                   myT += 1;
+                     document.querySelector("#filtered-total").innerHTML = `Celkový čas vybraných písniček: ${fancyTimeFormat(total)} (${myT} písniček)`;
+                   console.log(myT);
+               });
+
+
+
+           };
+
+
+           for (let i = 0; i < buttons.length; i++) {
+               deleteButtons[i].addEventListener("click", function() {
+
+                   
+
+                   
+                   total -= arr[i].len;
+                   count -= 1;
+                   console.log(count);
+                addTo2nd();
+                   buttons[i].style.background = "white";
+                   buttons[i].style.color = "black";
+
+               });
+           }
+           document.querySelector("#d").addEventListener("click", reset);
+
+       }
+
+
+
+       function addTo2nd(text) {
+
+           document.querySelector("#filtered-total").innerHTML = `Celkový čas vybraných písniček: ${fancyTimeFormat(total)} (${count} písniček)`;
+       }
+
+     
+
+       function addToSelected(arr) {
+
+           for (var i = 0; i < arr.length; i++) {
+               document.querySelector("#filtered").innerHTML +=
+                   "<div>" + arr[i].name + " " + fancyTimeFormat(arr[i].len) + "<div>";
+           }
+       }
+
+
+
+
+       function reset() {
+           window.location.reload();
+       }
+
+       function render() {
+
+           // add to UI
+           addToUI(songs, "best", '#data');
+           addToUI(folk, "folk", '#folk');
+           addToUI(instrum, "instrum", '#instrum');
+           addToUI(jazz, "jazz", '#jazz');
+           addToUI(kelt, "kelt", '#kelt');
+           addToUI(pop, "pop", '#pop');
+           addToUI(spirit, "spirit", '#spirit');
+           addToUI(tramp, "tramp", '#tramp');
+           addToUI(gospel, "gospel", '#gospel');
+           addToUI(advent, "advent", '#advent');
+           addToUI(christmas, "christmas", '#christmas');
+
+           // add event listeners
+           addELs(songs, "best");
+           addELs(folk, "folk");
+           addELs(instrum, "instrum");
+           addELs(jazz, "jazz");
+           addELs(kelt, "kelt");
+           addELs(pop, "pop");
+           addELs(spirit, "spirit");
+           addELs(tramp, "tramp");
+           addELs(gospel, "gospel");
+           addELs(advent, "advent");
+           addELs(christmas, "christmas");
+       }
+
+       return {
+           render: render,
+       
+       };
+   })();
+
+   UIC.render();
+   
+    // 770 131 144
+  </script>
+</body>
+</html>
