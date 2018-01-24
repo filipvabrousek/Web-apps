@@ -1,0 +1,68 @@
+
+  <section>
+    <h2>LOCAL TAPAS</h2>
+    <p></p>
+    <ul class="tasks">
+      <li>Loading Tapas...</li>
+    </ul>
+    <form class="add-items">
+      <input type="text" name="item" placeholder="Item Name" required>
+      <input type="submit" value="+ Add Item">
+    </form>
+  </section>
+
+<script>
+    
+// will stick around
+const btn = document.querySelector(".add-items");
+const itemsList = document.querySelector(".tasks");
+const items = JSON.parse(localStorage.getItem("items")) || [];
+    
+    
+//------------------------------------------------
+function add(e){
+    e.preventDefault(); // what this does ???
+    const text = (this.querySelector("[name=item]")).value;
+    const item = {
+    text,
+    done: false
+    };
+    
+    items.push(item);
+    populateList(items, itemsList);
+    localStorage.setItem("items", JSON.stringify(items));
+    this.reset();
+}
+    
+    
+//------------------------------------------------
+function populateList(tasks = [], taskList){
+    taskList.innerHTML = tasks.map((task, i) => {
+        return `
+        <li>
+    <input type="checkbox" data-index=${i} id="items${i}" ${task.done ? "checked" : ""} />
+    <label for="item${i}">${task.text}</label>
+        </li>
+        `;
+    }).join('');
+}
+    
+    
+    
+//------------------------------------------------
+function toogle(e){
+    if (!e.target.matches("input")) return; // skip as log at it is NOT input
+    const el = e.target;
+    const index = el.dataset.index; // dataSet
+    items[index].done = !items[index].done;
+    localStorage.setItem("items", JSON.stringify(items));
+    populateList(items, itemsList);
+}
+    
+btn.addEventListener("submit", add);
+itemsList.addEventListener("click", toogle);
+populateList(items, itemsList);
+
+</script>
+
+
