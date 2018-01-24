@@ -1,0 +1,35 @@
+
+<div class="words" contenteditable></div>
+
+<script>
+    
+    const recognition = new webkitSpeechRecognition();
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+
+    let p = document.createElement("p");
+    const words = document.querySelector(".words");
+    words.appendChild(p);
+
+    recognition.addEventListener("result", e => {
+    	const result = Array.from(e.results)
+    		.map(res => res[0])
+    		.map(res => res.transcript)
+    		.join("");
+
+    	const poop = result.replace(/poop|poo|shit|dump/gi, '💩');
+    	p.textContent = poop;
+
+    	if (e.results[0].isFinal) {
+    		p = document.createElement("p");
+    		words.appendChild(p);
+    	}
+    });
+
+    recognition.addEventListener("end", recognition.start);
+    recognition.start();
+
+    
+    
+
+</script>
