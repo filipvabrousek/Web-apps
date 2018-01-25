@@ -1,0 +1,26 @@
+
+<p></p>
+<div class="arrow"></div>
+
+<script>
+    
+const speed = document.querySelector("p");
+const arrow = document.querySelector(".arrow");
+    
+navigator.geolocation.watchPosition(data => {
+    console.log(data.coords.speed);
+    speed.textContent = data.coords.speed;
+    arrow.style.transform = `rotate(${data.coords.heading}deg)`;
+    
+}, err => console.log("Err"));
+    
+
+</script>
+
+<style>
+    .arrow{
+        width: 3em;
+        height: 8em;
+        background: #1abc9c;
+    }
+</style>
