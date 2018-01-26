@@ -1,0 +1,84 @@
+
+<h1>Welcome to counting game !</h1>
+<p class="task">[task will be here]</p>
+<input type="number" plaholder="Enter result">
+<button>Check</button>
+
+
+<p class="output">Correct / Wrong ?</p>
+<p>Points</p>
+
+<script>
+
+// counting game
+let taska = document.querySelector(".task");
+let inp =  document.querySelector("input");
+let btn = document.querySelector("button");
+let output = document.querySelector("output");
+    
+let result;
+let score = 0;
+    
+function gen(max, min){
+    let a = Math.floor(Math.random() * (max - min) + min);
+    let b = Math.floor(Math.random() * (max - min) + min);
+    let r = Math.random();
+    let res = r > 0.5 ? a + b : a - b;
+    let task = r > 0.5 ? a + "+" + b : a + "-" + b ;
+    taska.innerHTML = task;
+    result = res;
+}
+    
+    
+function check(){
+    if(Number(inp.value) === result){
+    console.log("Well done! ", score);
+    score += 1;
+} else {
+    console.log("You lost");
+}
+}
+    
+btn.addEventListener("click", check);
+
+    gen(1,10)
+
+</script>
+
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    }
+    body {
+        background: #1abc9c;
+    }
+    
+    h1{
+        color: #fff;
+        text-align: center;
+    }
+    
+    button{
+        font-size: 1em;
+        padding: 0.7em;
+        border-radius: 6px;
+    }
+    
+    input{
+        padding: 1em;
+        font-size: 1em;
+        margin-left: 40%;
+    }
+    
+    p{
+        text-align: center;
+        color: #fff;
+        
+    }
+    
+    .task{
+    margin: 1em;
+    }
+</style>
