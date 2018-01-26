@@ -1,0 +1,99 @@
+    <video width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop>
+</video>
+
+
+<div id="fill">
+    <button class="toggle">►</button>
+    <button class="fullscreen">[]</button>
+    <input type="range"/>
+    
+</div>
+
+
+
+
+<script>
+const S = (e) =>  document.querySelector(e);
+
+
+let video = S("video");
+let btn = S(".toggle");
+let fullscreen = S(".fullscreen");
+let fill = S("#fill");
+let seekBar = S(" input[type='range']");
+
+
+function toggle() {
+	const method = video.paused ? "play" : "pause";
+	video[method]();
+	btn.textContent = video.paused ? "►" : "❚❚";
+}
+
+btn.addEventListener("click", toggle);
+
+function handleChange() {
+	const percent = (video.currentTime / video.duration) * 100;
+	fill.style.width = `${percent*7.7}`; // 4
+	seekBar.value = percent;
+}
+setInterval(handleChange, 500);
+
+
+seekBar.addEventListener("change", () => {
+	let time = video.duration * (seekBar.value / 100);
+	video.currentTime = time;
+});
+
+seekBar.addEventListener("mousedown", () => video.pause());
+seekBar.addEventListener("mouseup", () => video.play());
+
+//seekBar.style.width = video.style.width;
+seekBar.style.opacity = 0;
+fill.addEventListener("mouseover", () => seekBar.style.opacity = 1);
+fill.addEventListener("mouseout", () => seekBar.style.opacity = 0);
+video.addEventListener("click", toggle);
+
+fullscreen.addEventListener("click", () =>  video.webkitRequestFullscreen());
+</script>
+
+<style>
+    
+
+    #control{
+    
+    /*width: 30em;*/
+    width: 60em;
+    height: 2em;
+    background: red;
+    }
+    
+    #fill{
+    position: absolute;
+       width: 0em;
+    height: 2em;
+    background: green;  
+    }
+    
+    .toggle{
+    margin: 0.6em;
+    }
+    
+    input[type="range"]{
+        width: 60em;
+        position:absolute;
+    }
+    
+    input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -3px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+}
+
+    
+</style>
