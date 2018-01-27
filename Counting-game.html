@@ -7,50 +7,60 @@
 <button>Check</button>
 
 
-<p class="output">Correct / Wrong ?</p>
-<p>Points</p>
+<p class="outputA">Correct / Wrong ?</p>
+<p class="outputB">Correct / Wrong ?</p>
+
 
 <script>
-// counting game
+
 let taska = document.querySelector(".task");
-let inp =  document.querySelector("input");
+let inp = document.querySelector("input");
 let btn = document.querySelector("button");
-let output = document.querySelector(".output");
+let outputA = document.querySelector(".outputA");
+let outputB = document.querySelector(".outputB");
 let body = document.querySelector("body");
-    
+
 
 let result;
-let score = 0;
-    
-function gen(max, min){
-    let a = Math.floor(Math.random() * (max - min) + min);
-    let b = Math.floor(Math.random() * (max - min) + min);
-    let r = Math.random();
-    let res = r > 0.5 ? a + b : a - b;
-    let task = r > 0.5 ? a + "+" + b : a + "-" + b ;
-    taska.innerHTML = task;
-    result = res;
+let scoreA = 0;
+let scoreB = 0;
+let player;
+//let LS = localStorage;
+player = 1;
+
+function gen(max, min) {
+	let a = Math.floor(Math.random() * (max - min) + min);
+	let b = Math.floor(Math.random() * (max - min) + min);
+	let r = Math.random();
+	let res = r > 0.5 ? a + b : a - b;
+	let task = r > 0.5 ? a + "+" + b : a + "-" + b;
+	player === 1 ? taska.innerHTML = `It is player 2 turn: ${task}` : taska.innerHTML = `It is player 1 turn: ${task}`;;
+
+	result = res;
 }
-    
-    
-function check(){
-    if(Number(inp.value) === result){
-    score += 1;
-    console.log("Well done! ", score);
-    output.innerHTML = `You have ${score} points`;
-    body.style.background = "#1abc9c";
-    inp.innerHTML = "";
-} else {
-    console.log("You lost");
-    body.style.background = "#e74c3c";
+
+
+function check() {
+
+	player == 1 ? player = 2 : player = 1;
+
+	if (Number(inp.value) === result) {
+		player === 1 ? scoreA += 1 : 0;
+		player === 2 ? scoreB += 1 : 0;
+		outputA.innerHTML = `Player 1 has ${scoreA} points`;
+		outputB.innerHTML = `Player 2 has ${scoreB} points`;
+		body.style.background = "#1abc9c";
+		inp.innerHTML = "";
+
+	} else {
+		body.style.background = "#e74c3c";
+	}
+	gen(1, 10);
 }
-gen(1, 10);
-}
-    
+
 btn.addEventListener("click", check);
 
-gen(1,10);
-
+gen(1, 10);
 </script>
 
 <style>
