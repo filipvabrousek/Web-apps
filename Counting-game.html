@@ -1,7 +1,9 @@
 
 <h1>Welcome to counting game !</h1>
 <p class="task">[task will be here]</p>
+
 <input type="number" plaholder="Enter result">
+
 <button>Check</button>
 
 
@@ -9,13 +11,14 @@
 <p>Points</p>
 
 <script>
-
 // counting game
 let taska = document.querySelector(".task");
 let inp =  document.querySelector("input");
 let btn = document.querySelector("button");
-let output = document.querySelector("output");
+let output = document.querySelector(".output");
+let body = document.querySelector("body");
     
+
 let result;
 let score = 0;
     
@@ -32,16 +35,21 @@ function gen(max, min){
     
 function check(){
     if(Number(inp.value) === result){
-    console.log("Well done! ", score);
     score += 1;
+    console.log("Well done! ", score);
+    output.innerHTML = `You have ${score} points`;
+    body.style.background = "#1abc9c";
+    inp.innerHTML = "";
 } else {
     console.log("You lost");
+    body.style.background = "#e74c3c";
 }
+gen(1, 10);
 }
     
 btn.addEventListener("click", check);
 
-    gen(1,10)
+gen(1,10);
 
 </script>
 
