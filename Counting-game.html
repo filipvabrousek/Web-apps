@@ -25,6 +25,7 @@ let result;
 let scoreA = 0;
 let scoreB = 0;
 let player;
+let winner;
 //let LS = localStorage;
 player = 1;
 
@@ -39,7 +40,7 @@ function gen(max, min) {
 	result = res;
 }
 
-
+// who gets first to 21 pooints
 function check() {
 
 	player == 1 ? player = 2 : player = 1;
@@ -50,13 +51,20 @@ function check() {
 		outputA.innerHTML = `Player 1 has ${scoreA} points`;
 		outputB.innerHTML = `Player 2 has ${scoreB} points`;
 		body.style.background = "#1abc9c";
-		inp.innerHTML = "";
-
+		
+        winner = 0;
+        console.log(scoreA, scoreB)
+        if (scoreA >= 6 || scoreB >= 6){
+        scoreA > scoreB ? winner = 1 : winner = 2; // 21
+        console.log("Player " + winner + " has won!");
+        }
+        
 	} else {
 		body.style.background = "#e74c3c";
 	}
 	gen(1, 10);
 }
+    
 
 btn.addEventListener("click", check);
 
