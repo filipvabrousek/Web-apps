@@ -4,7 +4,8 @@
 
 <input type="number" plaholder="Enter result">
 
-<button>Check</button>
+<button class="check">Check</button>
+<button class="reset">New Game</button>
 
 
 <p class="outputA">Correct / Wrong ?</p>
@@ -13,13 +14,13 @@
 
 <script>
 
-let taska = document.querySelector(".task");
+let instructions = document.querySelector(".task");
 let inp = document.querySelector("input");
-let btn = document.querySelector("button");
+let btn = document.querySelector(".check");
 let outputA = document.querySelector(".outputA");
 let outputB = document.querySelector(".outputB");
 let body = document.querySelector("body");
-
+let reset = document.querySelector(".reset");
 
 let result;
 let scoreA = 0;
@@ -30,17 +31,18 @@ let winner;
 player = 1;
 
 function gen(max, min) {
+    player = Math.round(Math.random(1, 2)); // random player
 	let a = Math.floor(Math.random() * (max - min) + min);
 	let b = Math.floor(Math.random() * (max - min) + min);
-	let r = Math.random();
+	
+    let r = Math.random();
 	let res = r > 0.5 ? a + b : a - b;
 	let task = r > 0.5 ? a + "+" + b : a + "-" + b;
-	player === 1 ? taska.innerHTML = `It is player 2 turn: ${task}` : taska.innerHTML = `It is player 1 turn: ${task}`;;
-
+	player === 1 ? instructions.innerHTML = `It is player 2 turn: ${task}` : instructions.innerHTML = `It is player 1 turn: ${task}`;
 	result = res;
 }
 
-// who gets first to 21 pooints
+// check who gets to 6 points first
 function check() {
 
 	player == 1 ? player = 2 : player = 1;
@@ -53,10 +55,12 @@ function check() {
 		body.style.background = "#1abc9c";
 		
         winner = 0;
-        console.log(scoreA, scoreB)
+        
         if (scoreA >= 6 || scoreB >= 6){
-        scoreA > scoreB ? winner = 1 : winner = 2; // 21
-        console.log("Player " + winner + " has won!");
+        scoreA > scoreB ? winner = 1 : winner = 2; 
+        console.log("Player " + winner + " has won (reached 6 points first!");
+        outputB.innerHTML = "";
+        outputA.innerHTML = `Player ${player} has won!`;
         }
         
 	} else {
@@ -66,9 +70,25 @@ function check() {
 }
     
 
+    
+function newGame(){
+    scoreA = 0;
+    scoreB = 0;
+    outputA.innerHTML = `Player 1 has ${scoreA} points`;
+    outputB.innerHTML = `Player 2 has ${scoreB} points`;
+    gen(1, 10);
+}
+    
+function init(){
 btn.addEventListener("click", check);
+reset.addEventListener("click", newGame)
+gen(1, 10);  
+}
+    
+init();
+    
 
-gen(1, 10);
+
 </script>
 
 <style>
@@ -102,6 +122,10 @@ gen(1, 10);
         text-align: center;
         color: #fff;
         
+    }
+    
+    .outputA, .outputB{
+        margin-top: 1em;
     }
     
     .task{
