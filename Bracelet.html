@@ -4,19 +4,19 @@
 <canvas width="800" height = "800"></canvas>
 
 <section id = "bracelets">
-<img src="images/1.png" data-id="1" class="a0">
-<img src="images/2.png" data-id="2" class="a1">
-<img src="images/3.png" data-id="3" class="a2">
+<img src="images/smaragd.png" data-id="smaragd" class="a0"> <!---SMARAGD-->
+<img src="images/hnedy.png" data-id="hnedy" class="a1"> <!---HNEDY-->
+<img src="images/modry.png" data-id="modry" class="a2"> <!---MODRY-->
 </section>
 
 
-<select>
+<select id="size">
 <option value= "10">10 cm</option>
 <option value= "11">11 cm</option>
 <option value= "12">12 cm</option>
 </select>
 
-<select>
+<select id="type">
 <option value= "natural">natural</option>
 <option value= "normal">normal</option>
 <option value= "modern">modern</option>
@@ -29,12 +29,36 @@
 <button>Odeslat</button>
 
 <p class="order"></p>
+<p class="summary">summary</p>
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA1N0Txaat35ggZQxqTD-3QPznlfScyx8M",
+    authDomain: "bracelet-33008.firebaseapp.com",
+    databaseURL: "https://bracelet-33008.firebaseio.com",
+    projectId: "bracelet-33008",
+    storageBucket: "",
+    messagingSenderId: "937935998840"
+  };
+ let deafult =  firebase.initializeApp(config);
+let ref = firebase.database().ref().child("data");
+ref.set("M")
+</script>
+
+
+
+
 
 <script>
 // init variables and draw circle on canvas
 let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
-let imgArray = ["images/1.png", "images/2.png", "images/3.png"];
+let imgArray = ["images/smaragd.png", "images/hnedy.png", "images/modry.png"];
 ctx.beginPath();
 ctx.arc(340, 340, 300, 0, Math.PI * 2, true);
 ctx.lineWidth = 8;
@@ -48,7 +72,7 @@ let arr = [...imgs];
 
 /*-------------------------------------------------------------------------------------------------------*/
 let index = 0;
-let order = new Array(3); // change th length
+//let order = new Array(3); // change th length
 
 for (let i = 0; i < imgs.length; i++) {
     arr[i].addEventListener("click", () => {
@@ -61,20 +85,44 @@ for (let i = 0; i < imgs.length; i++) {
             index = 1
         }
         document.querySelector(`.a${i}`).src = imgArray[index - 1];
-        document.querySelector(".instruction").innerHTML = `Právě jste vybrali korálek s číslem ${index}`;
-        order[i] = index;
-        console.log(order);
+        document.querySelector(".instruction").innerHTML = `Právě jste vybrali kamínek s číslem ${index}`;
+        
+        /*
+        let res = document.querySelector(`.a${i}`).getAttribute("src");
+       console.log(res.substr(7, 7) +" " + res);
+        order.push(index);
+       // console.log(order);
+       */
     })
 }
 
 
 /*-------------------------------------------------------------------------------------------------------*/
 
-function send(datas) {
-    document.querySelector(".order").innerHTML = `You order ${datas.length} ${datas.line}`;
+function send() {
+    let first = document.querySelector(`.a0`).dataset.id;
+     let second = document.querySelector(`.a1`).dataset.id;
+     let third = document.querySelector(`.a2`).dataset.id;
+
+    let len = document.querySelector("#size");
+    let length = len.options[len.selectedIndex].value;
+    let tp = document.querySelector("#type");
+    let type = tp.options[tp.selectedIndex].value;
+    
+    
+    
+    
+    let answer = 
+    "první: " + first + "\n" 
+    + "druhý: "+ second + "\n" 
+    + "třetí: " + third + "\n"
+    + "typ: " + type +"\n"
+    + "délka: " + len;
+    console.log(answer); // FIR send this string it to server
+    
 }
 
-document.querySelector("button").addEventListener("click", send({}));
+document.querySelector("button").addEventListener("click", send);
     
   
     
