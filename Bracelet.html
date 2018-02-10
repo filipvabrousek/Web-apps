@@ -1,0 +1,135 @@
+<h1>Vytvoř si vlastní náramek</h1>
+
+
+<canvas width="800" height = "800"></canvas>
+
+<section id = "bracelets">
+<img src="images/1.png" data-id="1" class="a0">
+<img src="images/2.png" data-id="2" class="a1">
+<img src="images/3.png" data-id="3" class="a2">
+</section>
+
+
+<select>
+<option value= "10">10 cm</option>
+<option value= "11">11 cm</option>
+<option value= "12">12 cm</option>
+</select>
+
+<select>
+<option value= "natural">natural</option>
+<option value= "normal">normal</option>
+<option value= "modern">modern</option>
+</select>
+
+
+
+
+<p class="instruction">Klepněte na korálek</p>
+<button>Odeslat</button>
+
+<p class="order"></p>
+
+<script>
+// init variables and draw circle on canvas
+let canvas = document.querySelector("canvas");
+let ctx = canvas.getContext("2d");
+let imgArray = ["images/1.png", "images/2.png", "images/3.png"];
+ctx.beginPath();
+ctx.arc(340, 340, 300, 0, Math.PI * 2, true);
+ctx.lineWidth = 8;
+ctx.stroke();
+
+
+/*-------------------------------------------------------------------------------------------------------*/
+const S = (el) => document.querySelectorAll(el);
+let imgs = S("img"); // select all images
+let arr = [...imgs];
+
+/*-------------------------------------------------------------------------------------------------------*/
+let index = 0;
+let order = new Array(3); // change th length
+
+for (let i = 0; i < imgs.length; i++) {
+    arr[i].addEventListener("click", () => {
+
+        index += 1;
+        if (index > 3) {
+            index = 1
+        } // edit this condition to fit number of imgs
+        if (index <= 1) {
+            index = 1
+        }
+        document.querySelector(`.a${i}`).src = imgArray[index - 1];
+        document.querySelector(".instruction").innerHTML = `Právě jste vybrali korálek s číslem ${index}`;
+        order[i] = index;
+        console.log(order);
+    })
+}
+
+
+/*-------------------------------------------------------------------------------------------------------*/
+
+function send(datas) {
+    document.querySelector(".order").innerHTML = `You order ${datas.length} ${datas.line}`;
+}
+
+document.querySelector("button").addEventListener("click", send({}));
+    
+  
+    
+</script>
+
+<style>
+    button, select {
+        padding: 1em;
+        background: #e67e22;
+        border: none;
+        color: white;
+        font-weight: bold;
+    }
+    
+    select {
+        margin-top: 2em;
+    }
+    canvas{
+        border: 1px solid black;
+    }
+    img {
+        width: 8em;
+        height: auto;
+    }
+    
+    .logo{
+    position: absolute;
+    top: 26em;
+    left: 17.5em;
+    }
+    
+    .a0{
+        position: absolute;
+        top: 20em;
+        left: 0em;
+    }
+    
+    .a1{
+        position: absolute;
+        top: 30em;
+        left: 3em;
+    }
+    
+     .a2{
+        position: absolute;
+        top: 37em;
+        left: 16em;
+    }
+    
+    h1{
+        color: #e67e22;
+        font-size: 2em;
+        font-family: Halvetica, Arial, "sans-serif";
+    }
+    
+    
+    
+</style>
