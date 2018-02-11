@@ -11,15 +11,15 @@
 
 
 <select id="size">
-<option value= "10">10 cm</option>
-<option value= "11">11 cm</option>
-<option value= "12">12 cm</option>
+<option value="10">10 cm</option>
+<option value="11">11 cm</option>
+<option value="12">12 cm</option>
 </select>
 
 <select id="type">
-<option value= "natural">natural</option>
-<option value= "normal">normal</option>
-<option value= "modern">modern</option>
+<option value = "moderní">moderní</option>
+<option value = "přírodní">přírodní</option>
+<option value = "jednoduchý">jednoduchý</option>
 </select>
 
 
@@ -29,7 +29,7 @@
 <button>Odeslat</button>
 
 <p class="order"></p>
-<p class="summary">summary</p>
+<p id="summary">summary</p>
 
 
 
@@ -42,12 +42,11 @@
     authDomain: "bracelet-33008.firebaseapp.com",
     databaseURL: "https://bracelet-33008.firebaseio.com",
     projectId: "bracelet-33008",
-    storageBucket: "",
+    storageBucket: "https://bracelet-33008.firebaseio.com/",
     messagingSenderId: "937935998840"
   };
- let deafult =  firebase.initializeApp(config);
-let ref = firebase.database().ref().child("data");
-ref.set("M")
+ firebase.initializeApp(config);
+
 </script>
 
 
@@ -59,6 +58,7 @@ ref.set("M")
 let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
 let imgArray = ["images/smaragd.png", "images/hnedy.png", "images/modry.png"];
+let titles = ["smaragd", "hnedy", "modry"];
 ctx.beginPath();
 ctx.arc(340, 340, 300, 0, Math.PI * 2, true);
 ctx.lineWidth = 8;
@@ -72,8 +72,6 @@ let arr = [...imgs];
 
 /*-------------------------------------------------------------------------------------------------------*/
 let index = 0;
-//let order = new Array(3); // change th length
-
 for (let i = 0; i < imgs.length; i++) {
     arr[i].addEventListener("click", () => {
 
@@ -85,14 +83,9 @@ for (let i = 0; i < imgs.length; i++) {
             index = 1
         }
         document.querySelector(`.a${i}`).src = imgArray[index - 1];
+       document.querySelector(`.a${i}`).dataset.id= titles[index - 1];
         document.querySelector(".instruction").innerHTML = `Právě jste vybrali kamínek s číslem ${index}`;
-        
-        /*
-        let res = document.querySelector(`.a${i}`).getAttribute("src");
-       console.log(res.substr(7, 7) +" " + res);
-        order.push(index);
-       // console.log(order);
-       */
+      
     })
 }
 
@@ -100,7 +93,7 @@ for (let i = 0; i < imgs.length; i++) {
 /*-------------------------------------------------------------------------------------------------------*/
 
 function send() {
-    let first = document.querySelector(`.a0`).dataset.id;
+     let first = document.querySelector(`.a0`).dataset.id;
      let second = document.querySelector(`.a1`).dataset.id;
      let third = document.querySelector(`.a2`).dataset.id;
 
@@ -110,25 +103,32 @@ function send() {
     let type = tp.options[tp.selectedIndex].value;
     
     
-    
-    
     let answer = 
-    "první: " + first + "\n" 
-    + "druhý: "+ second + "\n" 
-    + "třetí: " + third + "\n"
-    + "typ: " + type +"\n"
-    + "délka: " + len;
-    console.log(answer); // FIR send this string it to server
+    "první: " + first + ",\n" 
+    + "druhý: "+ second + ",\n" 
+    + "třetí: " + third + ",\n"
+    + "typ: " + type +",\n"
+    + "délka: " + length;
+    document.querySelector("#summary").innerHTML = `Vybrali jste: ${answer}`;
+
+    
+// TO-DO: POSLAT  NA SERVER
+/*
+let ref = firebase.database().ref().child("data");
+ref.set("M")
+console.log(ref);
+*/ 
+
     
 }
 
 document.querySelector("button").addEventListener("click", send);
-    
-  
-    
 </script>
 
 <style>
+    *{
+    font-family: Arial, sans-serif;
+    }
     button, select {
         padding: 1em;
         background: #e67e22;
@@ -162,14 +162,14 @@ document.querySelector("button").addEventListener("click", send);
     
     .a1{
         position: absolute;
-        top: 30em;
-        left: 3em;
+        top: 33em;
+        left: 4em;
     }
     
      .a2{
         position: absolute;
-        top: 37em;
-        left: 16em;
+        top: 39em;
+        left: 18em;
     }
     
     h1{
