@@ -1,13 +1,39 @@
-<h1>Vytvoř si vlastní náramek</h1>
+<h1>NÁRAMEK NA MÍRU</h1>
+
+<p>Nemůžete najít ideállní náramek pro sebe nebo své známé? Máte oblíbenou barvu, kámen nebo symbol? Vytvořte si vlstaní náramek podle sebe. Neomezené množství kombinací a barev</p>
 
 
-<canvas width="800" height = "800"></canvas>
+
+<div id="wrapper">
+<canvas></canvas>
 
 <section id = "bracelets">
 <img src="images/smaragd.png" data-id="smaragd" class="a0"> <!---SMARAGD-->
 <img src="images/hnedy.png" data-id="hnedy" class="a1"> <!---HNEDY-->
 <img src="images/modry.png" data-id="modry" class="a2"> <!---MODRY-->
 </section>
+
+</div>
+
+<section id="stones">
+
+    
+<table>
+<thead>Přírodní kameny</thead>
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Modrý achát</td></tr>    
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Sněhová vločka</td></tr>  
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Malachit</td></tr>    
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Tygří oko</td></tr> 
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Modrý achát</td></tr>    
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Sněhová vločka</td></tr>  
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Malachit</td></tr>    
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Modrý achát</td></tr> 
+</table>
+</section>
+
+
+
+
 
 
 <select id="size">
@@ -60,8 +86,8 @@ let ctx = canvas.getContext("2d");
 let imgArray = ["images/smaragd.png", "images/hnedy.png", "images/modry.png"];
 let titles = ["smaragd", "hnedy", "modry"];
 ctx.beginPath();
-ctx.arc(340, 340, 300, 0, Math.PI * 2, true);
-ctx.lineWidth = 8;
+ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 3, 0, Math.PI * 2, true);
+ctx.lineWidth = 3;
 ctx.stroke();
 
 
@@ -126,58 +152,82 @@ document.querySelector("button").addEventListener("click", send);
 </script>
 
 <style>
-    *{
-    font-family: Arial, sans-serif;
-    }
-    button, select {
-        padding: 1em;
-        background: #e67e22;
-        border: none;
-        color: white;
-        font-weight: bold;
-    }
-    
-    select {
-        margin-top: 2em;
-    }
-    canvas{
-        border: 1px solid black;
-    }
-    img {
-        width: 8em;
-        height: auto;
-    }
-    
-    .logo{
-    position: absolute;
-    top: 26em;
-    left: 17.5em;
-    }
-    
-    .a0{
-        position: absolute;
-        top: 20em;
-        left: 0em;
-    }
-    
-    .a1{
-        position: absolute;
-        top: 33em;
-        left: 4em;
-    }
-    
-     .a2{
-        position: absolute;
-        top: 39em;
-        left: 18em;
-    }
-    
-    h1{
-        color: #e67e22;
-        font-size: 2em;
-        font-family: Halvetica, Arial, "sans-serif";
-    }
-    
-    
+* {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+button, select {
+	padding: 1em;
+	background: #e67e22;
+	border: none;
+	color: white;
+	font-weight: bold;
+}
+
+select {
+	margin-top: 2em;
+}
+
+canvas {
+	border: 1px solid black;
+}
+
+img {
+	width: 8em;
+	height: auto;
+}
+
+.logo {
+	position: absolute;
+	top: 26em;
+	left: 17.5em;
+}
+
+.a0 {
+	position: absolute;
+	top: 20em;
+	left: 0em;
+}
+
+.a1 {
+	position: absolute;
+	top: 33em;
+	left: 4em;
+}
+
+.a2 {
+	position: absolute;
+	top: 39em;
+	left: 18em;
+}
+
+h1 {
+	color: darkblue;
+	font-size: 2em;
+	font-family: Halvetica, Arial, "sans-serif";
+	text-align: center;
+}
+
+.sm {
+	width: 2em;
+}
+
+td, thead {
+	padding: .4em;
+	background: grey;
+}
+
+canvas {
+	width: 500;
+	height: 500;
+}
+
+#wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
     
 </style>
