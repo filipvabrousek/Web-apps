@@ -1,25 +1,14 @@
 <h1>NÁRAMEK NA MÍRU</h1>
 
-<p>Nemůžete najít ideállní náramek pro sebe nebo své známé? Máte oblíbenou barvu, kámen nebo symbol? Vytvořte si vlstaní náramek podle sebe. Neomezené množství kombinací a barev</p>
+<p class="intro">Nemůžete najít ideální náramek pro sebe nebo své známé? Máte oblíbenou barvu, kámen nebo symbol? Vytvořte si vlastní náramek podle sebe. Neomezené množství kombinací a barev</p>
 
 
 
 <div id="wrapper">
-<canvas></canvas>
-
-<section id = "bracelets">
-<img src="images/smaragd.png" data-id="smaragd" class="a0"> <!---SMARAGD-->
-<img src="images/hnedy.png" data-id="hnedy" class="a1"> <!---HNEDY-->
-<img src="images/modry.png" data-id="modry" class="a2"> <!---MODRY-->
-</section>
-
-</div>
-
-<section id="stones">
-
     
+<section id="stones">
 <table>
-<thead>Přírodní kameny</thead>
+<tr><td>PŘÍRODNÍ KAMENY</td></tr>
 <tr><td><img src="images/smaragd.png" class="sm" > </td><td>Modrý achát</td></tr>    
 <tr><td><img src="images/smaragd.png" class="sm" > </td><td>Sněhová vločka</td></tr>  
 <tr><td><img src="images/smaragd.png" class="sm" > </td><td>Malachit</td></tr>    
@@ -31,11 +20,41 @@
 </table>
 </section>
 
+<!---<canvas></canvas>--->
+    
+<img class="circle" src="circle.png">
+
+    
+    
 
 
+    
+<section id="symbol">
+<table>
+<tr><td>SYMBOLY</td></tr>
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Leopard stříbrný</td></tr>    
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Leopard zlatý</td></tr>  
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Buddha stříbrný</td></tr>    
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Buddha zlatý</td></tr> 
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Leopard stříbrný</td></tr>    
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Leopard zlatý</td></tr>  
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Buddha stříbrný</td></tr>    
+<tr><td><img src="images/smaragd.png" class="sm" > </td><td>Buddha zlatý</td></tr> 
+</table>
+</section>
+
+</div>
+
+<section id = "bracelets">
+<img src="images/smaragd.png" data-id="smaragd" class="a0 s"> <!---SMARAGD-->
+<img src="images/hnedy.png" data-id="hnedy" class="a1 s"> <!---HNEDY-->
+<img src="images/modry.png" data-id="modry" class="a2 s"> <!---MODRY-->
+</section>
 
 
+<!--- <p class="instruction">Klepněte na korálek</p> -->
 
+<section id="send">
 <select id="size">
 <option value="10">10 cm</option>
 <option value="11">11 cm</option>
@@ -48,13 +67,11 @@
 <option value = "jednoduchý">jednoduchý</option>
 </select>
 
-
-
-
-<p class="instruction">Klepněte na korálek</p>
 <button>Odeslat</button>
-
 <p class="order"></p>
+</section>
+
+
 <p id="summary">summary</p>
 
 
@@ -80,20 +97,13 @@
 
 
 <script>
-// init variables and draw circle on canvas
-let canvas = document.querySelector("canvas");
-let ctx = canvas.getContext("2d");
+
 let imgArray = ["images/smaragd.png", "images/hnedy.png", "images/modry.png"];
 let titles = ["smaragd", "hnedy", "modry"];
-ctx.beginPath();
-ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 3, 0, Math.PI * 2, true);
-ctx.lineWidth = 3;
-ctx.stroke();
-
 
 /*-------------------------------------------------------------------------------------------------------*/
 const S = (el) => document.querySelectorAll(el);
-let imgs = S("img"); // select all images
+let imgs = S(".s"); // select all images
 let arr = [...imgs];
 
 /*-------------------------------------------------------------------------------------------------------*/
@@ -110,9 +120,7 @@ for (let i = 0; i < imgs.length; i++) {
         }
         document.querySelector(`.a${i}`).src = imgArray[index - 1];
        document.querySelector(`.a${i}`).dataset.id= titles[index - 1];
-        document.querySelector(".instruction").innerHTML = `Právě jste vybrali kamínek s číslem ${index}`;
-      
-    })
+    });
 }
 
 
@@ -158,16 +166,14 @@ document.querySelector("button").addEventListener("click", send);
 	padding: 0;
 }
 
-button, select {
-	padding: 1em;
-	background: #e67e22;
-	border: none;
-	color: white;
-	font-weight: bold;
+body {
+	background: #ecf0f1;
 }
 
-select {
-	margin-top: 2em;
+.intro {
+	margin-left: 10%;
+	margin-right: 10%;
+	text-align: center;
 }
 
 canvas {
@@ -185,38 +191,47 @@ img {
 	left: 17.5em;
 }
 
-.a0 {
-	position: absolute;
-	top: 20em;
-	left: 0em;
-}
+/*---------------------STONES---------------------*/
 
-.a1 {
-	position: absolute;
-	top: 33em;
-	left: 4em;
-}
-
-.a2 {
-	position: absolute;
-	top: 39em;
-	left: 18em;
+.a0, .a1, .a2 {
+	width: 3em;
 }
 
 h1 {
-	color: darkblue;
-	font-size: 2em;
-	font-family: Halvetica, Arial, "sans-serif";
+	font-size: 3em;
+	font-weight: 300;
+	font-family: Helvetica, Arial, "sans-serif";
 	text-align: center;
+	margin-bottom: 1em;
+	margin-top: 1em;
 }
+
+/*--------------------------------------- TABLES ---------------------------------------*/
 
 .sm {
 	width: 2em;
 }
 
+table {
+	background: #fff;
+	box-shadow: -2px -2px 20px #000;
+}
+
 td, thead {
 	padding: .4em;
-	background: grey;
+}
+
+tr td:after {
+	content: "";
+	border: 1px solid grey;
+}
+
+thead {
+	color: red;
+}
+
+table tr td {
+	border: 1px solid red;
 }
 
 canvas {
@@ -228,6 +243,65 @@ canvas {
 	display: flex;
 	justify-content: center;
 	align-items: center;
- }
-    
+	margin-top: 4em;
+}
+
+#symbol {
+	flex: 1;
+}
+
+#stones {
+	flex: 1;
+}
+
+.circle {
+	flex: 3;
+	min-width: 200px;
+	margin: 1em;
+}
+
+#send {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1em;
+}
+
+#send>* {
+	margin: 1em;
+}
+
+button {
+	padding: 1em;
+	background: #00a8ff;
+	border: none;
+	color: white;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+select {
+	text-transform: uppercase;
+	background: #fff;
+	background: transparent;
+	background: url("https://i.imgur.com/WqK2xLh.jpg");
+	height: 3em;
+	width: 10em;
+	border: none;
+	border-radius: 0; /*no-effect ?*/
+}
+
+#summary {
+	margin: 2em;
+	font-weight: bold;
+	text-align: center;
+}
+
+#bracelets {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: -1em;
+}
+ 
 </style>
