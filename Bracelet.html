@@ -8,7 +8,7 @@
     
 <section id="stones">
 <table>
-<tr><td>PŘÍRODNÍ KAMENY</td></tr>
+<tr><td colspan="2" class="b">PŘÍRODNÍ KAMENY</td></tr>
 <tr><td><img src="images/smaragd.png" class="sm" > </td><td>Modrý achát</td></tr>    
 <tr><td><img src="images/smaragd.png" class="sm" > </td><td>Sněhová vločka</td></tr>  
 <tr><td><img src="images/smaragd.png" class="sm" > </td><td>Malachit</td></tr>    
@@ -26,12 +26,16 @@
 
     
     
-
+<style>
+    tr td{
+        border: 1px solid red;
+    }    
+</style>
 
     
 <section id="symbol">
 <table>
-<tr><td>SYMBOLY</td></tr>
+<tr><td colspan="2" class="b">SYMBOLY</td></tr>
 <tr><td><img src="images/smaragd.png" class="sm" > </td><td>Leopard stříbrný</td></tr>    
 <tr><td><img src="images/smaragd.png" class="sm" > </td><td>Leopard zlatý</td></tr>  
 <tr><td><img src="images/smaragd.png" class="sm" > </td><td>Buddha stříbrný</td></tr>    
@@ -56,12 +60,14 @@
 
 <section id="send">
 <select id="size">
+<option value="not-selected">VELIKOST NÁRAMKU</option>
 <option value="10">10 cm</option>
 <option value="11">11 cm</option>
 <option value="12">12 cm</option>
 </select>
 
 <select id="type">
+<option value="not-selected">TYP PROVÁZKU</option>
 <option value = "moderní">moderní</option>
 <option value = "přírodní">přírodní</option>
 <option value = "jednoduchý">jednoduchý</option>
@@ -75,6 +81,9 @@
 <p id="summary">summary</p>
 
 
+<section id="bottom">
+<h1>NECHTE SE INSPIROVAT</h1>
+</section>
 
 
 <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
@@ -174,6 +183,7 @@ body {
 	margin-left: 10%;
 	margin-right: 10%;
 	text-align: center;
+    color: gray;
 }
 
 canvas {
@@ -207,7 +217,9 @@ h1 {
 }
 
 /*--------------------------------------- TABLES ---------------------------------------*/
-
+    .b{
+    font-weight: bold;
+    }
 .sm {
 	width: 2em;
 }
@@ -230,9 +242,7 @@ thead {
 	color: red;
 }
 
-table tr td {
-	border: 1px solid red;
-}
+
 
 canvas {
 	width: 500;
@@ -278,6 +288,7 @@ button {
 	color: white;
 	text-transform: uppercase;
 	font-weight: bold;
+    font-size: .9em;
 }
 
 select {
@@ -286,9 +297,10 @@ select {
 	background: transparent;
 	background: url("https://i.imgur.com/WqK2xLh.jpg");
 	height: 3em;
-	width: 10em;
+	width: 12em;
 	border: none;
 	border-radius: 0; /*no-effect ?*/
+    font-size: .9em;
 }
 
 #summary {
@@ -303,5 +315,27 @@ select {
 	align-items: center;
 	margin-bottom: -1em;
 }
+    
+    #bottom{
+        background: #fff;
+    }
+    @media only screen and (max-width: 43em){
+        #wrapper{
+            flex-direction: column;
+        }
+        
+        .circle{
+            order: 1;
+        }
+        
+        #symbol{
+            order: 2;
+        }
+        
+        #stones{
+            order: 3;
+        }
+    }
+        
  
 </style>
