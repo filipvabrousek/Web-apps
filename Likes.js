@@ -1,36 +1,46 @@
 // 1 - connect to API
 const S = el => document.querySelector(el);
+const SA = el => document.querySelectorAll(el);
 const elements = {
-    people: S("#people"),
-    liked: S("#liked"),
-    img: S("img"),
-    imgButton: S(".img-button"),
-    age: S("#age")
+	people: S("#people"),
+	liked: S("#liked"),
+	img: S("img"),
+	imgButton: S(".img-button"),
+	age: S("#age"),
+	posts: document.querySelectorAll(".post")
 }
 
 const database = [];
+const names = [];
 
-const chatController = () =>{
 
-const url = 'https://randomuser.me/api/?results=6';
-fetch(url)
-.then(res => res.json())
+const chatController = () => {
 
-.then(data => data.results.map(a => {
-    database.push({name: a.name.first, img: a.picture.large, city: a.location.city, liked:false});
-    
-    elements.people.innerHTML += "<ul>";
-    database.map(el =>  elements.people.innerHTML += 
-    `<li data-id=${el.name} data-img=${el.img} data-city=${el.city} data-liked = ${el.liked}>${el.name}</li>
-    `);
-    
-    elements.people.innerHTML += "</ul>"; 
+	const url = 'https://randomuser.me/api/?results=6';
+	fetch(url)
+		.then(res => res.json())
 
-    
-}))
-    
-.catch(err => console.log(err));
-    
+		.then(data => data.results.map(a => {
+			database.push({
+				name: a.name.first,
+				img: a.picture.large,
+				city: a.location.city,
+				liked: false
+			});
+
+
+			database.map(el => elements.people.innerHTML +=
+				`
+            <div data-pname ="${el.name}" class="post">
+            <li data-id=${el.name} data-img=${el.img} data-city=${el.city} data-liked = ${el.liked}>${el.name}</li>
+            <img class="placeholder" src="${el.img}"/>
+            </div>
+            `);
+			database.map(el => names.push(el.name));
+		}))
+
+		.catch(err => console.log(err));
+
 }
 
 chatController();
@@ -39,25 +49,33 @@ chatController();
 const liked = [];
 
 elements.people.addEventListener("click", e => {
-   if (e.target.matches("li")){
-           elements.img.src = e.target.closest("li").dataset.img;
-       elements.img.dataset.name = e.target.closest("li").dataset.id;
-       elements.age.innerHTML = ` Name: ${e.target.closest("li").dataset.id}
+	if (e.target.matches("li")) {
+		elements.img.src = e.target.closest("li").dataset.img;
+		elements.img.dataset.name = e.target.closest("li").dataset.id;
+		elements.age.innerHTML = ` Name: ${e.target.closest("li").dataset.id}
        <br> City: ${e.target.closest("li").dataset.city}`;
-   }
+	}
+
+
 });
 
 
 elements.img.addEventListener("dblclick", e => {
-
-             e.target.dataset.liked = true;
-            elements.liked.innerHTML += e.target.dataset.name + "<br>";  
+	e.target.dataset.liked = true;
+	elements.liked.innerHTML += e.target.dataset.name + "<br>";
 });
-
 
 
 // Highlight element we s.earch
 
+function highlight(word) {
+	let res = names.indexOf(word);
+	let i = Array.from(SA(".post")).findIndex(el => el.dataset.pname === word)
+	let all = SA(".post");
+	all[i].style.border = "2px solid green";
+}
+
+S("#search").addEventListener("click", () => highlight(S("input").value));
 
 /*
 <!DOCTYPE html>
@@ -79,8 +97,8 @@ elements.img.addEventListener("dblclick", e => {
     
 
     
-<img data-name = "O" class="img" src="https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg"/>  
-<p id="age">18</p>
+<img data-name = "O" class="img" src="http://via.placeholder.com/1000x1000"/>  
+<p id="age">[data]</p>
     
 <div id="liked">
 <h2>Liked people</h2>  
@@ -129,13 +147,13 @@ margin: 1em;
     float: right;
     width: 300px;
     position: absolute;
-    left: 130px;
+    left: 530px;
     top: 100px;
     }
     
     p{
         position: absolute;
-        left: 130px;
+        left: 530px;
         top: 323px;
         color: white;
         font-size: 2em;
@@ -146,8 +164,8 @@ margin: 1em;
     
     #liked{
         position: absolute;
-        left: 500px;
-        top: 90px;
+        left: 900px;
+        top: 100px;
     }
     
     .profile{
@@ -161,11 +179,34 @@ margin: 1em;
     color: green;
     }
     
+    .placeholder{
+    position: relative;
+    left: 0em;
+    top: -60px;
+    width: 220px;
+    }
+    
     li:hover{
         cursor: hand;
     }
+    
+    .post{
+        background: #ecf0f1;
+        width: 400px;
+        height: 200px;
+        padding: 1em;
+        margin: 0.5em;
+    }
+    
+
 </style>
+   
+    
 <script src="script.js"></script>
 </body>
+
+
+
+
 
 */
