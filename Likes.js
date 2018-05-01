@@ -3,7 +3,8 @@ const S = el => document.querySelector(el);
 const elements = {
     people: S("#people"),
     liked: S("#liked"),
-    img: S("img")
+    img: S("img"),
+    imgButton: S(".img-button")
 }
 
 const database = [];
@@ -19,14 +20,11 @@ fetch(url)
     
     elements.people.innerHTML += "<ul>";
     database.map(el =>  elements.people.innerHTML += 
-    `<li data-id=${el.name} data-img=${el.img}>${el.name}</li>
-     <button data-id="${el.name}">&hearts;</button>`);
+    `<li data-id=${el.name} data-img=${el.img}>${el.name}</li>`);
     elements.people.innerHTML += "</ul>"; 
 }))
     
 .catch(err => console.log(err));
-
-    
     
 }
 
@@ -43,16 +41,17 @@ const liked = [];
 elements.people.addEventListener("click", e => {
    if (e.target.matches("li")){
            elements.img.src = e.target.closest("li").dataset.img;
+       elements.img.dataset.name = e.target.closest("li").dataset.id;
    }
-    
-    if (e.target.matches("button")){
-        console.log(e.target.closest("button").dataset.id + " was liked")
-        liked.push(e.target.closest("button").dataset.id);
-        liked.map(el => {
-            elements.liked.innerHTML += `${el}<br>`
-        })
-    }
 });
+
+
+elements.img.addEventListener("dblclick", e => {
+        elements.liked.innerHTML += e.target.dataset.name + "<br>";    
+});
+
+
+
 
 
 
@@ -75,12 +74,10 @@ elements.people.addEventListener("click", e => {
 </div>
     
 <div id="liked">
-Liked    
+<h2>Liked people</h2>  
 </div>
     
-<img class="img" src="https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg"/>  
-
-    
+<img data-name = "O" class="img" src="https://www.gettyimages.ie/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg"/>  
 
     
 <style>
@@ -123,7 +120,7 @@ margin: 1em;
     
    .img{
     float: right;
-    width: 800px;
+    width: 300px;
     }
     
     
@@ -134,5 +131,4 @@ margin: 1em;
 </style>
 <script src="script.js"></script>
 </body>
-
 */
