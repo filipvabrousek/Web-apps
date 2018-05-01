@@ -36,7 +36,7 @@ const chatController = () => {
             <img class="placeholder" src="${el.img}"/>
             </div>
             `);
-			database.map(el => names.push(el.name));
+			database.map(el => names.push(el.name)); 
 		}))
 
 		.catch(err => console.log(err));
