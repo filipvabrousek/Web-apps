@@ -119,7 +119,7 @@ height: 6em;
 display: flex;
 justify-content: center;
 align-items: center;
-    }    
+   }    
     
 input{
 padding: 1em;
